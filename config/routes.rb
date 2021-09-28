@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-end
+  root to: 'public/homes#top'
+  devise_for :customers
+  devise_for :admins
+
+  namespace :admin do
+    resources :items
+    resources :genres
+  end
+
+
+  end

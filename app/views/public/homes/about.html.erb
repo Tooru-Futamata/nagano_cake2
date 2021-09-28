@@ -1,0 +1,75 @@
+<div class="container takasa">
+  <div class="row">
+
+    <div class="col-xs-3 sidebar">
+      <ul type="none">
+        <li><a class="gaiyou" href="#">会社概要</a></li>
+        <li><a class="button" href="#">企業理念</a></li>
+        <li><a class="button" href="#">社長挨拶</a></li>
+        <li><a class="button" href="#">歴史・沿革</a></li>
+        <li><a class="button" href="#">品質保証の理念</a></li>
+      </ul>
+    </div>
+
+    <div class="col-xs-9 about-content">
+      <div class="about-show about-s"><%= render "about_show"%></div>
+      <h2 class="about-index"><i class="fas fa-building"></i>会社概要</h2>
+      <about class="about-index">
+      <table class="table-bordered">
+      <tr>
+        <th bgcolor="#99CC99">会社名</th>
+        <td style="width: 450px; height: 60px;">株式会社ユートピア</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">創業</th>
+        <td>1456年4月</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">資本金</th>
+        <td>500円</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">代表者</th>
+        <td>おっくん</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">売上高</th>
+        <td>２兆6千億円</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">従業員</th>
+          <td>３人</td>
+      </tr>
+      <tr>
+        <th bgcolor="#99CC99">事業所</th>
+        <td>長野県松本市山葵町３−６</td>
+      </tr>
+    </table><br>
+  </about>
+    <div id="container">
+      <div id="theTarget">
+        <div class="image1"></div>
+        <div class="image2"></div>
+        <div class="image3"></div>
+        <div class="image4"></div>
+        <div class="image5"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+
+    $('.button').on('click', function(){
+      $('.about-index').addClass('about-s');
+      $('.about-show').css({'opacity': '1'});
+      $('.about-show').hide().removeClass('about-s').fadeIn(1500);
+    });
+    $('.gaiyou').on('click', function(){
+      $('.about-show').css({'opacity': '0'});
+      $('.about-show').addClass('about-s');
+      $('.about-index').removeClass('about-s').hide().fadeIn(1500);
+    });
+});
+</script>
