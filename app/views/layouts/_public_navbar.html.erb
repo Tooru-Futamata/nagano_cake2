@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <%= link_to image_tag("logo.png"), root_path %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+              <% if customer_signed_in? %>
+                <li>ようこそ、<%= current_customer.last_name %><%= current_customer.first_name %>さん！</li>
+                <li>
+                  <%= link_to "マイページ", customers_path(current_customer), class: "text-light px-2" %>
+                </li>
+                <li>
+                  <%= link_to "商品一覧", items_path, class: "text-light px-2" %>
+                </li>
+                <li>
+                  <%= link_to "カート", cart_items_path, class: "text-light px-2" %>
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "text-light px-2" %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "新規登録", new_customer_registration_path, class: "text-light px-2" %>
+                </li>
+                <li>
+                  <%= link_to "ログイン", new_customer_session_path, class: "text-light px-2" %>
+                </li>
+                <li>
+                  <%= link_to "商品一覧", items_path, class: "text-light px-2" %>
+                </li>
+              <% end %>
+              <li class="nav-item">
+                <form class="form-inline">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+                </form>
+              </li>
+          </ul>
+        </div>
+</nav>

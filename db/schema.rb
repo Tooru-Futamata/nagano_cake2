@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_065948) do
+ActiveRecord::Schema.define(version: 2021_09_28_124402) do
 
   create_table "addresses", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 2021_09_28_065948) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "postal_code"
+    t.string "address"
+    t.string "phone_number"
+    t.string "withdrawal_status"
+    t.boolean "is_deleted"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -68,6 +75,18 @@ ActiveRecord::Schema.define(version: 2021_09_28_065948) do
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "customer_idnullfalse"
+  end
+
+  create_table "to_orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.string "name", null: false
+    t.string "shipping_cost", default: "800", null: false
+    t.integer "total_payment", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.integer "status", default: 0, null: false
   end
 
 end

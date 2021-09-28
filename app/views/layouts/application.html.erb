@@ -22,16 +22,16 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
     <% if customer_signed_in? %>
-    <li><%= link_to  "Home", user_path(current_user), class:"fas fa-home nav-link text-light" %></li>
+    <li><%= link_to  "Home", user_path(current_customer), class:"fas fa-home nav-link text-light" %></li>
     <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
     <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
     <li><a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out"> logout</a></li>
     <% else %>
 
     <li><a class="fas fa-home nav-link text-light" href="/"> Home</a></li>
-    <li><%#= link_to  "About", about_path, class:"fas fa-link nav-link text-light" %></li>
-    <li><a class="fas fa-user-plus nav-link text-light" href="/users/sign_up"> sign up</a></li>
-    <li><a class="fas fa-sign-in-alt nav-link text-light" href="/users/sign_in"> login</a></li>
+    <li><%= link_to  "About", about_path, class:"fas fa-link nav-link text-light" %></li>
+    <li><a class="fas fa-user-plus nav-link text-light" href="/customers/sign_up"> sign up</a></li>
+    <li><a class="fas fa-sign-in-alt nav-link text-light" href="/cu/sign_in"> login</a></li>
     <% end %>
     </ul>
     </div>

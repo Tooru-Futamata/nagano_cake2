@@ -1,12 +1,28 @@
-<div class="container takasa">
+<div class="container">
   <div class="row">
-    <h2>管理者画面</h2>
-  </div>
-  <div class="row today-order">
-    <br>
-    <p>本日の注文件数:　<%#= @order.count %>件</p>
-    <br>
-    <br>
-    <%#= link_to "注文履歴一覧", admin_orders_path, class:"btn btn-primary" %>
+    <div class="col-lg-12">
+      <h1>注文履歴一覧</h1>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">購入日</th>
+            <th scope="col">購入者</th>
+            <th scope="col">注文ステータス</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%# @orders.each do |order| %>
+            <tr>
+              <td><%#= order.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%#= order.name %></td>
+              <td><%#= order.statu %></td>
+              <td><%#= link_to '詳細', admin_order_path(order) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
