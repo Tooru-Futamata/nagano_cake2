@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     resource :customers, only: [:show, :edit, :update,] do
     collection do
-    get 'quit'
-    patch 'out'
+    get 'unsubscribe'
+    patch 'withdraw'
     end
     end
     resources :cart_items, only: [:index, :update, :destroy, :create] do
@@ -29,10 +29,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :index, :show] do
     collection do
     post 'confirm'
-    get 'thanks'
+    get 'complete'
     end
     end
-    resources :shipping_addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     end
 
   end

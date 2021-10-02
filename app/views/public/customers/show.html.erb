@@ -3,6 +3,7 @@
 		<h2>マイページ</h2>
 		<p><strong class="information-link"><i class="far fa-user"></i>登録情報</strong>
 			<%= link_to " 編集する", edit_customers_path(@customer), class: "glyphicon glyphicon-pencil btn btn-success" %>
+			<%= link_to "パスワードを変更する", edit_customer_registration_path, class:"btn btn-primary" %></p>
 		</p>
 
 			<table class="table table-bordered table-condensed" >
@@ -36,7 +37,7 @@
 
 			<div class="mypage-bottoms">
 				<P><strong class="shipping-link">配送先</strong>
-					<%= link_to " 一覧を見る", shipping_addresses_path, data: {"turbolinks" => false}, class: "glyphicon glyphicon-folder-open btn btn-info" %>
+					<%= link_to " 一覧を見る", addresses_path, data: {"turbolinks" => false}, class: "glyphicon glyphicon-folder-open btn btn-info" %>
 				</p>
 				<p><strong class="order-link">注文履歴</strong>
 					<%= link_to " 一覧を見る", orders_path(id: @customer.id), class: "glyphicon glyphicon-folder-open btn btn-info" %>

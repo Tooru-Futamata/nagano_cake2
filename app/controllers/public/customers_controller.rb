@@ -19,11 +19,11 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def quit
+  def unsubscribe
     @customer = current_customer
   end
 
-  def out
+  def withdraw
     @customer = current_customer
     @customer = update(is_active: true)
     reset_session
