@@ -7,11 +7,32 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'homes#top', as: :root
-    resources :items
-    resources :genres
-    resources :customers
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:update, :show]
   end
 
+  scope module: :public do
+    resources :items, only: [:index, :show]
+    resource :customers, only: [:show, :edit, :update,] do
+    collection do
+    get 'quit'
+    patch 'out'
+    end
+    end
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+    collection do
+    delete 'all_destroy'
+    end
+    end
+    resources :orders, only: [:new, :create, :index, :show] do
+    collection do
+    post 'confirm'
+    get 'thanks'
+    end
+    end
+    resources :shipping_addresses, only: [:index, :edit, :create, :update, :destroy]
+    end
 
   end

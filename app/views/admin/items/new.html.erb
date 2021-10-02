@@ -1,51 +1,57 @@
-<div class="container takasa">
-  <div class="row row-new">
-
-    <h2>商品新規登録</h2><br>
-
-    <!-- 画像選択欄 -->
-    <div class="col-xs-4">
-      <%= form_for(@item, url:admin_items_path) do |f| %>
-
-      <div class="item-image">
-        <%#= attachment_image_tag @item, :image, class: "img-square", fallback: "no_image.jpg", size:"300x300" %>
-      </div><br>
-
-      <%#= f.attachment_field :image, placeholder: "商品画像" %>
-
-    </div>
-
-    <!-- 商品登録フォーム -->
-    <div class="col-xs-8">
-
-      <form>
-        <div class="new-field">
-          <h4><%= f.label :商品名 ,class: "col-xs-3" %>
-          <%= f.text_field :item_name, autofocus: true, autocomplete: "item_name" ,class: "col-xs-8"%></h4>
-        </div>
-        <div class="new-field">
-          <h4><%= f.label :商品説明 ,class: "col-xs-3" %>
-          <%= f.text_area :explanation, autofocus: true, autocomplete: "explanation" ,class: "col-xs-8"%></h4>
-        </div>
-        <div class="new-field">
-          <h4><%= f.label :ジャンル ,class: "col-xs-3 fix" %>
-          <%= f.collection_select :genre_id, Genre.all, :id, :name %></h4>
-          <!-- f.collection_select(プロパティ名, オブジェクトの配列, value属性の項目, 表示テキストの項目) -->
-          <!-- Genre.allでジャンルのテーブル内情報を持ってきてる -->
-
-        </div>
-        <div class="new-field">
-          <h4><%= f.label :税抜価格 ,class: "col-xs-3 block"  %>
-          <%= f.text_field :unit_price_without_tax, autofocus: true, autocomplete: "unit_price_without_tax" ,class: "col-xs-8"%></h4>
-        </div>
-        <div class="new-field">
-          <h4><%= f.label :販売ステータス  ,class: "col-xs-3 fix" %>
-          <%= f.select :sale_status, ["販売中", "販売停止"] ,class: "btn btn-primary"%></h4>
-        </div>
-        <div class="text-right"><%= f.submit "商品登録" ,class: "btn btn-primary"%></div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+  <body>
+    <div class="border col-7">
+        <br>
+        <h1>商品登録</h1>
+        <br>
+        <% if @item.errors.any? %>
+          <%= @item.errors.count %>件のエラーが発生しました
+          <% @item.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
         <% end %>
-      </form>
-
+        <div class="row">
+            <div class="col-md">
+                <%= form_with model: @item, url: admin_items_path, local: true do |f| %>
+                    <div class="form-group">
+                          <label>ジャンル：</label>
+                          <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+                    </div>
+                    <div class="form-group">
+                        <label>商品名：</label>
+                        <%= f.text_field :name %>
+                    </div>
+                    <div class="form-group">
+                        <label>商品説明：</label>
+                        <%= f.text_area :introduction %>
+                    </div>
+                    <div class="form-group">
+                        <label>税抜金額：</label>
+                        <%= f.text_field :price %>円
+                    </div>
+                    <div class="form-group">
+                        <label>販売ステータス：</label>
+                        <%= f.select :is_active,{販売中:true, 販売停止:false}%>
+                    </div>
+                    <div class="img_field">
+                        <label>画像：</label>
+                        <%#= f.attachment_field :image %>
+                    </div>
+                    <div class="col-5">
+                        <%= f.submit '新規登録', class: "btn btn-success"%>
+                    </div>
+                <% end %>
+                        <div class="col-5">
+                            <%= link_to "商品一覧", admin_items_path %>
+                        </div>
+                    </div>
+        </div>
+        <br>
     </div>
-  </div>
-</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+</body>

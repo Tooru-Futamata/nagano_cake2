@@ -1,37 +1,44 @@
-<div class="container takasa">
-
-  <h2>商品一覧</h2>
-
-  <div class="text-right index-new">
-    <%= link_to new_admin_item_path do %>
-      <button type="button" class="btn btn-success btn-success btn-circle btn-lg">＋</button>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>商品一覧</h1>
+      <%= link_to new_admin_item_path, data: {"turbolinks" => false}, class: "btn btn-warning pull-right new_product" do %>
+    <i class="fas fa-plus"></i>
+    商品新規登録
     <% end %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">商品ID</th>
+            <th scope="col">ジャンルID</th>
+            <th scope="col">商品名</th>
+            <th scope="col">税抜価格</th>
+            <th scope="col">販売ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= item.genre_id %></td>
+              <td>
+                <%= link_to admin_item_path(item), class: "btn-link" do %>
+                  <%= item.name %>
+                <% end %>
+              </td>
+              <td>¥<%= item.price %></td>
+              <td>
+                <% if item.is_active == true %>
+                  <p>販売中</p>
+                <% else item.is_active == false %>
+                  <p>販売停止</p>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <table class="table table-hover">
-    <thead>
-      <tr class="active"> <!-- active => 色をグレーに変更 -->
-        <th>商品ID</th>
-        <th>商品名</th>
-        <th>税抜価格</th>
-        <th>ジャンル</th>
-        <th>ステータス</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-      <tr>
-        <td><%= item.id %></td>
-        <td><%= item.item_name %></td>
-        <td><%= item.unit_price_without_tax %></td>
-        <td><%= item.genre_id %></td>
-        <td><%= item.sale_status %></td>
-        <td><%= link_to "商品詳細", admin_item_path(item) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%#= paginate @items %>
-
 </div>

@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_124402) do
+ActiveRecord::Schema.define(version: 2021_09_28_100642) do
 
   create_table "addresses", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "name", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,6 +34,9 @@ ActiveRecord::Schema.define(version: 2021_09_28_124402) do
   end
 
   create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "customer_id", null: false
+    t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,45 +47,38 @@ ActiveRecord::Schema.define(version: 2021_09_28_124402) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.string "telephone_number", null: false
+    t.boolean "is_active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "last_name"
-    t.string "first_name"
-    t.string "postal_code"
-    t.string "address"
-    t.string "phone_number"
-    t.string "withdrawal_status"
-    t.boolean "is_deleted"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
   create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.integer "valid_invalid_status"
   end
 
   create_table "items", force: :cascade do |t|
+    t.integer "genre_id", null: false
+    t.string "name", null: false
+    t.string "image_id"
+    t.text "introduction", null: false
+    t.integer "price", null: false
+    t.boolean "is_active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "genres_id"
-    t.integer "genre_id"
-    t.string "item_name"
-    t.integer "unit_price_without_tax"
-    t.integer "sale_status"
-    t.text "explanation"
-    t.string "image_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "customer_idnullfalse"
-  end
-
-  create_table "to_orders", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "postal_code", null: false
     t.string "address", null: false
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 2021_09_28_124402) do
     t.integer "total_payment", null: false
     t.integer "payment_method", default: 0, null: false
     t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
     <% if customer_signed_in? %>
-    <li><%= link_to  "Home", user_path(current_customer), class:"fas fa-home nav-link text-light" %></li>
+    <li><%#= link_to  "Home", user_path(current_customer), class:"fas fa-home nav-link text-light" %></li>
     <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
     <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
     <li><a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out"> logout</a></li>

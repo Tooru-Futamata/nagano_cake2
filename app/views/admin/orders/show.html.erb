@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+    <div class="border col-7">
+    <br>
+    <h2>注文詳細画面</h2>
+        <div class="field">
+          <p>
+            購入日時：<%= @order.created_at %>
+          </p>
+        </div>
+        <div class="field">
+          <p>
+            購入者：<%= @customer.last_name %><%= @customer.first_name %>
+          </p>
+        </div>
+        <div class="field">
+          <p>
+            配送先住所：<br>
+            〒<%= @order.postal_code %>　<%= @order.address %>
+          </p>
+        </div>
+         <div class="field">
+          <p>
+            配送先氏名：<%= @order.name %>
+          </p>
+        </div>
+        <div class="field">
+          <p>
+            注文個数：<%= @order.order_details.count %>
+          </p>
+        </div>
+        <%= form_with model:@order, local:true do |f| %>
+        <div class="field">
+          <p>
+            注文ステータス：<%= f.select :status, Order.status.keys, {} %>
+            <%= f.submit '更新', class: "btn btn-success"%>
+          </p>
+        </div>
+        <% end %>
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">商品名</th>
+            <th scope="col">数量</th>
+            <th scope="col">購入時価格（税込）</th>
+
+            <th scope="col">製作ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+            <tr>
+              <td><%= order_detail.item.id %></td>
+              <td><%= order_detail.amount %></td>
+              <td><% order_detail.price %>円</td>
+              <%= form_with model:@order_detail, local:true do |f| %>
+              <td>
+                <%= f.select :is_making_status, Order_detail.is_making_status.keys, {} %>
+                <%= f.submit '更新', class: "btn btn-success"%>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
