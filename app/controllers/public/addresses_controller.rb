@@ -18,8 +18,8 @@ class Public::AddressesController < ApplicationController
       flash[:notice] = "配送先を新たに登録しました"
     　redirect_to addresses_path
     else
-      render :index
       @addresses = Address.all
+      render :index
     end
   end
 

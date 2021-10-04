@@ -1,0 +1,56 @@
+<!--数量変更・カート削除の要素を含ませる-->
+<div class="container">
+  <div class="row">
+		<h2>Cart</h2>
+		<div class="pull-right margin-bottom">
+		  <%= link_to "カートを空にする", all_destroy_cart_items_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: "glyphicon glyphicon-trash btn btn-danger" %>
+    </div>
+
+		<table class="table table-hover table-inverse">
+  		<div class="col-4">
+    		<thead>
+          <tr class="info">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th colspan="1"></th>
+            <th>小計</th>
+            <th colspan="1"></th>
+          </tr>
+          </thead>
+  		  <tbody>
+  		    <% @cart_items.each do |cart_item| %>
+  		      <tr>
+              <td>
+                <%= attachment_image_tag cart_item.item, :image, :fill, 40, 40 %>
+                <%= cart_item.item.name %>
+              </td>
+              <td><%= cart_item.item.with_tax_price %></td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true do |f| %>
+                <td class="align-middle">
+                  <%= f.number_field :amount, value: cart_item[:amount], min: 1, class: "btn btn-outline-dark"%> 個
+                </td>
+                <td>
+                  <%= hidden_field_tag :item_id, cart_item[:item_id] %>
+                  <%= f.submit "更新", class: "btn btn-primary" %>
+                </td>
+              <% end %>
+              <td class="align-middle">
+                <%= cart_item.subtotal %> 円
+              </td>
+              <td>
+                <%= link_to " 削除する", cart_item_path(cart_item), method: :delete, remote: true, data: {confirm: "#{cart_item.item.name}を削除してよろしいですか？"}, class: "glyphicon glyphicon-trash btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </div>
+    </table>
+      <% if @cart_items.blank? %>
+        <%= "カートは空です" %>
+    	<% else %>
+    		<div class="text-center">
+    			<%= link_to '購入に進む', new_order_path, class:"btn btn-success" %>
+    		</div>
+    	<% end %>
+	</div>

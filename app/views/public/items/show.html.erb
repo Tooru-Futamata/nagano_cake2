@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-2 product-show">
+      <%#= attachment_image_tag(@item, :image, size: "340x340", fallback: "no_image.jpg" ) %>
+    </div>
+    <h2><%= @item.name %></h2><br>
+    <p><%= @item.introduction %></p><br>
+    <p>ジャンル：<%= @item.genre.name %></p><br>
+    <p>¥ <%= @item.with_tax_price.to_s(:delimited) %>(税込)</p><br>
+      <% if @item.is_active == true %>
+        <%= form_with model: @cart_item, local:true do |f| %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+          <%= f.select :amount, *[1..10], include_blank: "個数選択" %>
+          <%= f.submit "カートに入れる", class: "glyphicon glyphicon-shopping-cart btn btn-primary" %>
+        <% end %>
+      <% elsif @item.is_active == false %>
+        <h3>販売停止</h3>
+      <% end %>
+</div>
