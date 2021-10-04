@@ -5,8 +5,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -21,18 +19,30 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-    <% if customer_signed_in? %>
-    <li><%#= link_to  "Home", user_path(current_customer), class:"fas fa-home nav-link text-light" %></li>
-    <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
-    <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
-    <li><a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out"> logout</a></li>
-    <% else %>
-
-    <li><a class="fas fa-home nav-link text-light" href="/"> Home</a></li>
-    <li><%= link_to  "About", about_path, class:"fas fa-link nav-link text-light" %></li>
-    <li><a class="fas fa-user-plus nav-link text-light" href="/customers/sign_up"> sign up</a></li>
-    <li><a class="fas fa-sign-in-alt nav-link text-light" href="/cu/sign_in"> login</a></li>
-    <% end %>
+    <!-- 会員でログインしている時 -->
+                <% if customer_signed_in? %>
+                  <a id="youkoso">ようこそ、<%= current_customer.last_name %>さん！</a>
+                  <li><%= link_to customers_path do %><i class="fas fa-user"></i>マイページ<% end %></li>
+                  <li><%= link_to items_path do %><i class="fas fa-cookie-bite"></i>商品一覧<% end %></li>
+                  <li><%= link_to cart_items_path do %><div class="icon-flex"><i class="icon-count text-center"><%#= current_customer.cart_items.count %></i></div><i class="cart">カート</i><% end %></li>
+                  <li><%= link_to destroy_customer_session_path, method: :delete do %><i class="fas fa-sign-out-alt"></i>ログアウト<% end %></li>
+                  <%#= image_tag "cake.gif", :size =>'80x80' %>
+                <!-- 管理者でログインしている時 -->
+                <% elsif admin_signed_in?%>
+                  <li><%= link_to ' 商品一覧', admin_items_path %></li>
+                  <li><%= link_to ' 会員一覧', admin_customers_path %></li>
+                  <li><%= link_to ' 注文履歴一覧', admin_root_path %></li>
+                  <li><%= link_to ' ジャンル一覧', admin_genres_path %></li>
+                  <li><%= link_to ' ログアウト', destroy_admin_session_path, method: :delete %></li>
+                  <li><input name="search" placeholder="search　🔍"></li>
+                <!-- ログインしていない時 -->
+                <% else %>
+                  <li><%= link_to items_path do %><i class="fas fa-cookie-bite"></i>商品一覧<% end %></li>
+                  <li><%= link_to about_path do %><i class="fas fa-building"></i>会社概要<% end %></li>
+                  <li><%= link_to new_customer_registration_path do %><i class="fas fa-user-plus"></i>新規登録<% end %></li>
+                  <li><%= link_to new_customer_session_path do %><i class="fas fa-sign-in-alt"></i>ログイン<% end %></li>
+                  <%#= image_tag "cake.gif", :size =>'80x80' %>
+                <% end %>
     </ul>
     </div>
     </div>
