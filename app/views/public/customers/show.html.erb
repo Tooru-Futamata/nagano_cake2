@@ -2,9 +2,8 @@
   <div class="row">
 		<h2>マイページ</h2>
 		<p><strong class="information-link"><i class="far fa-user"></i>登録情報</strong>
-			<%= link_to " 編集する", edit_customers_path(@customer), class: "glyphicon glyphicon-pencil btn btn-success" %>
-			<%= link_to "パスワードを変更する", edit_customer_registration_path, class:"btn btn-primary" %></p>
-		</p>
+			<%= link_to "編集する", mypage_edit_customers_path, class:"glyphicon glyphicon-pencil btn btn-success" %>
+			<%#= link_to "パスワードを変更する", edit_customer_registration_path, class:"btn btn-primary" %></p>
 
 			<table class="table table-bordered table-condensed" >
 				<tbody>

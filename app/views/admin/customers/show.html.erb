@@ -5,7 +5,7 @@
 	  <tr>
       <th>顧客ID</th>
       <td><%= @customer.id %>
-      <% if @customer.withdrawal_status == "有効" %>
+      <% if @customer.is_active == "有効" %>
         <div class="label label-primary">有効会員</div>
       <% else %>
         <div class="label label-danger">退会済み</div>

@@ -2,6 +2,7 @@
 <div class="container">
   <div class="row">
 		<h2>注文情報確認画面</h2>
+		<%= form_for  @order,url: {action: 'create'} do |f| %>
 		<% @cart_items.each do |cart| %>
   <%= cart.item.name %> <!-- 商品名 -->
   <%= (cart.item.price).to_s(:delimited) %>　<!-- 金額 -->
@@ -14,7 +15,7 @@
 <%= @order.address %>
 
 <!-- ユーザーには注文確定ボタンだけ表示します -->
-<%= form_with model: @order, url: create へのパス, local: true do |f| %>
+<%= form_with model: @order, url: orders_path, local:true do |f| %>
   <%= f.hidden_field :name %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :total_price, value: @total %>

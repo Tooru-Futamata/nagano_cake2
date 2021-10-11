@@ -22,7 +22,7 @@
     <!-- 会員でログインしている時 -->
                 <% if customer_signed_in? %>
                   <a id="youkoso">ようこそ、<%= current_customer.last_name %>さん！</a>
-                  <li><%= link_to customers_path do %><i class="fas fa-user"></i>マイページ<% end %></li>
+                  <li><%= link_to mypage_customers_path do %><i class="fas fa-user"></i>マイページ<% end %></li>
                   <li><%= link_to items_path do %><i class="fas fa-cookie-bite"></i>商品一覧<% end %></li>
                   <li><%= link_to cart_items_path do %><div class="icon-flex"><i class="icon-count text-center"><%#= current_customer.cart_items.count %></i></div><i class="cart">カート</i><% end %></li>
                   <li><%= link_to destroy_customer_session_path, method: :delete do %><i class="fas fa-sign-out-alt"></i>ログアウト<% end %></li>
@@ -43,11 +43,12 @@
                   <li><%= link_to new_customer_session_path do %><i class="fas fa-sign-in-alt"></i>ログイン<% end %></li>
                   <%#= image_tag "cake.gif", :size =>'80x80' %>
                 <% end %>
-    </ul>
-    </div>
-    </div>
-    </nav>
-    </header>
+
+                </ul>
+                </div>
+                </div>
+                </nav>
+                </header>
 
     <main class="mb-auto">
       <p class="notice"><%= notice %></p>
