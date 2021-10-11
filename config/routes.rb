@@ -2,8 +2,6 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
 
-  devise_for :customers
-  devise_for :admins
 
   namespace :admin do
     root 'homes#top', as: :root
@@ -34,5 +32,8 @@ Rails.application.routes.draw do
     end
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     end
+
+    devise_for :customers
+    devise_for :admins
 
   end

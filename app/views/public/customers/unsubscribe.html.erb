@@ -9,8 +9,8 @@
       </p>
     </div>
     <div class="col text-center mt-2">
-      <%= link_to "退会しない", mypage_path, class: "btn btn-primary btn-sm mr-3" %>
-      <%= link_to "退会する", customers_withdraw_path, method: :patch, "date-confirm" => "OKを押すと退会処理が行われます。本当によろしいですか？", class: "btn btn-danger btn-sm" %>
+      <%= link_to "退会しない", customers_path, class: "btn btn-primary btn-sm mr-3" %>
+      <%= link_to "退会する", withdraw_customers_path, method: :patch, "date-confirm" => "OKを押すと退会処理が行われます。本当によろしいですか？", class: "btn btn-danger btn-sm" %>
     </div>
   </div>
 </div>

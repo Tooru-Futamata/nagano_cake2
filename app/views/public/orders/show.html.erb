@@ -14,13 +14,13 @@
           		<tr>
           			<th>配送先</th>
           			<td>
-          				〒<%= @order.ship_postal_code %><br>
-          				<%= @order.ship_address %><br>
+          				〒<%= @order.postal_code %><br>
+          				<%= @order.address %><br>
           				<%= @order.last_name %> <%= @order.first_name %>様
           			</td>
           		</tr>
           		<tr>
-          			<th>支払い方法</th>
+          			<th>支払方法</th>
           			<td><%= @order.payment %></td>
           		</tr>
           		<tr>
