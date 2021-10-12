@@ -1,5 +1,5 @@
 class OrderDetail < ApplicationRecord
- has_many :item
+  has_many :item
   has_many :order
 
   validates :item_id, :order_id, presence: true
