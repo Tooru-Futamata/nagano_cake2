@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm #注文情報確認画面
-    @order = Order.new
+    @order = Order.new(order_params)
     @address = Address.find(params[:order][:address_id])
     @order.postal_code = @address.postal_code
     @order.address = @address.address
@@ -46,6 +46,7 @@ class Public::OrdersController < ApplicationController
 
   def create #注文確定処理
     @order = current_customer.orders.new(order_params)
+    p @order
     @order.save
 
     current_customer.cart_items.each do |cart_item|
@@ -71,7 +72,7 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-      params.require(:order).permit(:payment_method, :postal_code, :address, :name, :address_id, :shipping_cost)
+      params.require(:order).permit(:payment_method, :postal_code, :address, :name, :shipping_cost, :total_payment)
   end
 
 end

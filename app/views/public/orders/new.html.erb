@@ -4,11 +4,11 @@
 		  <h3>支払方法</h3>
 		<%= form_with model: @order, url: orders_confirm_path, method: :get, local:true do |f| %>
 		    <p>
-		      <%= f.radio_button :payment_method, "credit_card" %>
-          <%= f.label :payment_method, "クレジットカード" %>
+		     <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+         <%= f.label :payment_method, "クレジットカード" %>
         </p>
         <p>
-          <%= f.radio_button :payment_method, "transfer" %>
+          <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
           <%= f.label :payment_method, "銀行振込" %>
         </p>
       <h3>お届け先</h3><br>

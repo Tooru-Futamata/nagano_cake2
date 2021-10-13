@@ -20,14 +20,14 @@
               <td>
                 〒<%= order.postal_code %><br>
                 <%= order.address %><br>
-                <%= order.last_name %><%= order.first_name %> 様
+                <%= order.name %> 様
               </td>
               <td>
                 <% order.order_details.each do |order_detail| %>
         					<%= order_detail.item.name %><br>
         				<% end %>
               </td>
-              <td><%= addTax(order.ordered_items.sum(:price)) %>円</td>
+              <td><%#= addTax(order.ordered_items.sum(:price)) %>円</td>
         			<td><%= link_to order_path(order), class: "btn btn-success" do %>表示する<% end %></td>
         		</tr>
             <% end %>
