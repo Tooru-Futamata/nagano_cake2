@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 122d93325697d63fc75a62cc5fb942fe5dfd7f3c
   namespace :admin do
     root 'homes#top', as: :root
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
@@ -36,4 +40,8 @@ Rails.application.routes.draw do
     devise_for :customers
     devise_for :admins
 
+<<<<<<< HEAD
 end
+=======
+  end
+>>>>>>> 122d93325697d63fc75a62cc5fb942fe5dfd7f3c

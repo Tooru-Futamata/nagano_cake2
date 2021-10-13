@@ -14,30 +14,20 @@ class Public::OrdersController < ApplicationController
     @order.postal_code = @address.postal_code
     @order.address = @address.address
     @order.name = @address.name
-    if params[:order][:address_number] == "1"
-      @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.address
-      @order.name = current_customer.last_name+current_customer.first_name
-
-    elsif  params[:order][:address_number] ==  "2"
-      @order.postal_code = Address.find(params[:order][:address]).postal_code
-      @order.address = Address.find(params[:order][:address]).address
-      @order.name = Address.find(params[:order][:address]).name
-
-    elsif params[:order][:address_number] ==  "3"
-      @address = Address.new()
-      @address.address = params[:order][:address]
-      @address.name = params[:order][:name]
-      @address.postal_code = params[:order][:postal_code]
-      @address.customer_id = current_customer.id
-
-    if @address.save
-      @order.postal_code = @address.postal_code
-      @order.name = @address.name
-      @order.address = @address.address
+    if @address_number == "0"
+        @order.address = current_customer.address
+        @order.post_code = current_customer.post_code
+        @order.name = current_customer.full_name
+    elsif @address_number == "1"
+        @address=Address.find(@address_id)
+        @order.address = @address.post_code
+        @order.post_code = @address.address
+        @order.name = @address.name
     else
-       render 'new'
-    end
+        @address=Address.new
+        @address.post_code = order_params[:post_code]
+        @address.address = order_params[:address]
+        @address.name = order_params[:name]
     end
   end
 
@@ -47,16 +37,7 @@ class Public::OrdersController < ApplicationController
   def create #注文確定処理
     @order = current_customer.orders.new(order_params)
     @order.save
-
-    current_customer.cart_items.each do |cart_item|
-      @order_detail = @order.order_details.build
-      @order_detail.order_id = @order.id
-      @order_detail.item_id = cart_item.item_id
-      @order_detail.amount = cart_item.amount
-      @order_detail.price = cart_item.item.price*cart_item.amount
-    end
-    current_customer.cart_items.destroy_all
-    redirect_to orders_complete_path
+    redirect_to complete_orders_path
   end
 
   def index #注文履歴画面
@@ -64,9 +45,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def show #注文履歴詳細画面
-    @order = Order.find(params[:id])
-    @order_details = @order.order_details
-    @shipping_cost = 800
+    @order = Order.find(params[:_id])
+    @sum = 0
+    @order.order_details.each do |order_detail|
+      @sum += order_detail.amount * order_detail.price
+    end
   end
 
   private
