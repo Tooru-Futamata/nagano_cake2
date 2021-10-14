@@ -23,12 +23,12 @@
                 <%= order.name %> 様
               </td>
               <td>
-                <% order.order_details.each do |order_detail| %>
-        					<%= order_detail.item.name %><br>
-        				<% end %>
+               <% order.order_details.each do |order_detail| %>
+               <%= order_detail.item.name %>
+            <% end %>
               </td>
-              <td><%#= addTax(order.ordered_items.sum(:price)) %>円</td>
-        			<td><%= link_to order_path(order), class: "btn btn-success" do %>表示する<% end %></td>
+              <td><%= order.total_payment %>円</td>
+        			<td><%= link_to order_path(order.id), class: "btn btn-success" do %>表示する<% end %></td>
         		</tr>
             <% end %>
           </tbody>

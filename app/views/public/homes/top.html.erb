@@ -1,16 +1,44 @@
-<main>
+<div class="item-list">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <h1 class="text-center">NAGANO CAKE</h1>
-
-      <!--col-12-->
+      <div class="col-md-2">
+        <!--<table class="genre-list">
+          <thead>
+            <tr>
+              <th class="genre-list-title">ジャンル検索</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%# @genres.each do |genre| %>
+              <tr>
+                <td><%#= genre.name %></td>
+              </tr>
+            <%# end %>
+          </tbody>
+        </table>-->
       </div>
-    <!--row-->
+      <div class="col-md-10">
+        <p class="home-text">
+          ようこそ、ながのCAKEへ！<br/>
+          このサイトは、ケーキ販売のECサイトになります。<br/>
+          会員でない方も商品の閲覧はできますが、<br/>
+          購入には会員登録が必要になります。
+        </p>
+        <h2>新着商品</h2>
+        <div class="home-item">
+          <% @items.each do |item| %>
+            <div class="home-item-list">
+              <div><%= attachment_image_tag item, :image, :fill, 180, 180 %></div>
+              <div><%= item.name %></div>
+              <div>¥<%= item.price %></div>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+      <div class="items-paginate">
+        <%#= paginate @items %>
+      </div>
     </div>
-  <!--container-->
   </div>
-  <div class="text-center">
-    <%#= link_to image_tag('sweets-887722_1280.jpg'), 'items_path' %>
-  </div>
-</main>
+</div>

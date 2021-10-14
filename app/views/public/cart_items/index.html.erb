@@ -21,11 +21,8 @@
   		  <tbody>
   		    <% @cart_items.each do |cart_item| %>
   		      <tr>
-              <td>
-                <%= attachment_image_tag cart_item.item, :image, :fill, 40, 40 %>
-                <%= cart_item.item.name %>
-              </td>
-              <td><%= cart_item.item.with_tax_price %></td>
+              <td class="cart_item-name"><%= cart_item.item.name %></td>
+              <td class="cart_item-price"><%= cart_item.item.price %></td>
               <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true do |f| %>
                 <td class="align-middle">
                   <%= f.number_field :amount, value: cart_item[:amount], min: 1, class: "btn btn-outline-dark"%> 個

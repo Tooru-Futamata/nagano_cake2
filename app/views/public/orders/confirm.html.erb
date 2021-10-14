@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <h2 class="col-md-4">注文情報確認</h2>
-    <div class="col-md-8"></div>
+    <div class="col-md-4"></div>
   </div>
 </div>
 
@@ -22,16 +22,43 @@
    <% @sum = 0 %>
 	<% current_customer.cart_items.each do |cart_item| %>
 	<tr>
-  <td><%= cart_item.item.name %></td> <!-- 商品名 -->
-  <td><%= cart_item.item.price %></td>　<!-- 金額 -->
-  <td><%= cart_item.amount %></td> <!-- 個数 -->
-  <td><%= (cart_item.item.price*cart_item.amount) %></td> <!-- 小計 -->
-  <% @sum += (cart_item.item.price*cart_item.amount) %>
+  <td class="order-item-text"><%= cart_item.item.name %></td>
+  <td class="order-item-text"><%= cart_item.item.price %></td>
+  <td class="order-item-text"><%= cart_item.amount %></td>
+  <td class="order-item-text"><%= cart_item.subtotal %></td> <!-- 小計 -->
   </tr>
+  <% @sum += cart_item.subtotal %>
   <% end %>
   </tbody>
   </table>
   </div>
+
+
+  <div class= "col-md-4">
+      <table class="order-item-cost">
+        <tbody>
+          <tr>
+            <td class="order-item-shipping_cost">送料</td>
+            <td class="order-item-text"><%= @order.shipping_cost %></td>
+          </tr>
+          <tr>
+            <td class="order-item-sum">商品合計</td>
+            <td class="order-item-text"><%= @sum %></td>
+          </tr>
+          <tr>
+            <td class="order-item-total">請求金額</td>
+            <td class="order-item-text"><%= @sum + @order.shipping_cost %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 <%= form_with model: @order, url: orders_path, local:true do |f| %>
   <div class="order-payment_method">
@@ -52,6 +79,7 @@
   <div class="information">
     <%= f.submit "注文を確定する", class: "button-green" %>
   </div>
+
 
 <% end %>
 

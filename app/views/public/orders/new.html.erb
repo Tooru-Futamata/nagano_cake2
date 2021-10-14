@@ -1,6 +1,10 @@
+<p></p>
 <div class="container">
   <div class="row">
-		<h2>注文情報入力画面</h2>
+    <h2 class="col-md-4">注文情報入力</h2>
+  </div>
+</div>
+
 		  <h3>支払方法</h3>
 		<%= form_with model: @order, url: orders_confirm_path, method: :get, local:true do |f| %>
 		    <p>
@@ -13,18 +17,18 @@
         </p>
       <h3>お届け先</h3><br>
         <p>
-          <%= f.radio_button :address_number, "1" %>
+          <%= f.radio_button :address_number, "0" %>
           <%= f.label :address,"ご自身の住所" %><br>
           〒<%= current_customer.postal_code %> <%= current_customer.address %><br>
           <%= current_customer.last_name %> <%= current_customer.first_name %>様
         </p>
         <p>
-          <%= f.radio_button :address_number, "2" %>
+          <%= f.radio_button :address_number, "1" %>
           <%= f.label :address,"登録済住所から選択" %><br>
-          <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address) %>
+         <%= f.select :address_id, @address.map{ |address| [address.postal_code + address.address + address.name, address.id]} %>
         </p>
         <p>
-          <%= f.radio_button :address_number, "3" %>
+          <%= f.radio_button :address_number, "" %>
           <%= f.label :address,"新しいお届け先" %><br>
           <%= f.label :郵便番号 %>
           <%= f.text_field :postal_code %>
